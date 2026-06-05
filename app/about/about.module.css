@@ -1,0 +1,227 @@
+.contentSection {
+  padding: 5rem 0;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.imageWrapper {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+.profileText h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.profileText p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--light-text);
+  margin-bottom: 1.5rem;
+}
+
+.highlightCard {
+  background: var(--primary-glow);
+  padding: 1.5rem;
+  border-left: 4px solid var(--primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-weight: 500;
+  color: var(--primary-deep);
+  margin-top: 2rem;
+}
+
+/* Vision Mission Grid */
+.visionMission {
+  background: var(--white);
+  padding: 5rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.vmGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.vmCard {
+  padding: 3rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(185deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  border: 1px solid var(--border-color);
+}
+
+.vmIcon {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.vmCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.vmCard p {
+  line-height: 1.6;
+  color: var(--light-text);
+}
+
+/* Core Values */
+.valuesSection {
+  padding: 5rem 0;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.valueCard {
+  text-align: center;
+  padding: 2rem;
+}
+
+.valueIcon {
+  color: var(--accent-gold);
+  margin-bottom: 1.2rem;
+}
+
+.valueCard h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.valueCard p {
+  font-size: 0.95rem;
+  color: var(--light-text);
+  line-height: 1.5;
+}
+
+/* Directors Section */
+.directorsSection {
+  background: var(--primary-glow);
+  padding: 5rem 0;
+}
+
+.directorsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.directorCard {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: var(--transition-normal);
+  text-align: center;
+}
+
+.directorCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
+}
+
+.directorAvatar {
+  background: var(--green-gradient);
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  position: relative;
+}
+
+.avatarCircle {
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius-full);
+  background: var(--white);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--accent-gold-glow);
+  box-shadow: var(--shadow-md);
+  position: absolute;
+  bottom: -45px;
+}
+
+.directorInfo {
+  padding: 4rem 2rem 2.5rem 2rem;
+}
+
+.directorInfo h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.3rem;
+}
+
+.directorRole {
+  color: var(--accent-gold-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.directorBio {
+  font-size: 0.95rem;
+  color: var(--light-text);
+  line-height: 1.5;
+}
+
+@media (max-width: 968px) {
+  .profileGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .vmGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .valuesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .directorsGrid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin: 3rem auto 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+}

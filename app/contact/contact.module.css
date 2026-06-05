@@ -1,0 +1,148 @@
+.section {
+  padding: 5rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 4rem;
+}
+
+.infoCol h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.infoText {
+  color: var(--light-text);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+}
+
+.contactList {
+  list-style: none;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.iconWrapper {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
+  background: var(--primary-glow);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contactItem h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.contactItem p {
+  color: var(--light-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Map placeholder placeholder */
+.mapPlaceholder {
+  height: 200px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-gradient-start);
+  border: 1px solid var(--border-color);
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-light);
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.mapPlaceholder p {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--primary-deep);
+}
+
+/* Form Styles */
+.formCol {
+  background: var(--white);
+  padding: 3rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md), var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.formCol h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.alertSuccess {
+  background: #e8f5e9;
+  color: var(--success);
+  border: 1px solid rgba(56, 176, 0, 0.2);
+}
+
+.alertError {
+  background: #ffebee;
+  color: var(--error);
+  border: 1px solid rgba(217, 4, 41, 0.2);
+}
+
+@media (max-width: 968px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .formCol {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
