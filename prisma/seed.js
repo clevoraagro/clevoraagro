@@ -1,10 +1,13 @@
+require('dotenv').config();
 const { PrismaClient } = require('../app/generated/prisma/client');
-const { PrismaBetterSqlite3 } = require('@prisma/adapter-better-sqlite3');
-const path = require('path');
+const { PrismaPg } = require('@prisma/adapter-pg');
+const pg = require('pg');
 const crypto = require('crypto');
 
-const dbPath = path.resolve(__dirname, '../dev.db');
-const adapter = new PrismaBetterSqlite3({ url: dbPath });
+const pool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL
+});
+const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 function hashPassword(password) {
@@ -14,7 +17,7 @@ function hashPassword(password) {
 }
 
 async function main() {
-  console.log('Seeding database...');
+  console.log('Seeding database with URL:', process.env.DATABASE_URL);
 
   // 1. Create Admin
   const adminUsername = 'admin';
