@@ -2,17 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { LayoutDashboard, Inbox, Image, LogOut, Plus, Trash2, Edit, Save, X, Eye, Film } from 'lucide-react';
+import { LayoutDashboard, Inbox, Image, LogOut, Plus, Trash2, Edit, Save, X, Eye, Film, Tags, Settings } from 'lucide-react';
 import styles from '../admin.module.css';
 
 export default function AdminDashboard() {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('products'); // 'products', 'inquiries', 'gallery'
+  const [activeTab, setActiveTab] = useState('products'); // 'products', 'categories', 'inquiries', 'gallery'
 
   // Data States
   const [products, setProducts] = useState([]);
+  const [productFilter, setProductFilter] = useState('All');
+  const [categories, setCategories] = useState([]);
   const [inquiries, setInquiries] = useState([]);
   const [gallery, setGallery] = useState([]);
 
@@ -37,6 +39,18 @@ export default function AdminDashboard() {
   const [showGalleryForm, setShowGalleryForm] = useState(false);
   const [uploadingProductImage, setUploadingProductImage] = useState(false);
   const [uploadingGalleryMedia, setUploadingGalleryMedia] = useState(false);
+  const [categoryName, setCategoryName] = useState('');
+  const [editingCategoryId, setEditingCategoryId] = useState(null);
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, id: null, type: '', message: '' });
+  const [showCategoryForm, setShowCategoryForm] = useState(false);
+
+  const [settingsForm, setSettingsForm] = useState({
+    currentPassword: '',
+    newUsername: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
+  const [updatingSettings, setUpdatingSettings] = useState(false);
 
   // Authentication check and data fetch
   useEffect(() => {
@@ -57,6 +71,11 @@ export default function AdminDashboard() {
           const prodRes = await fetch('/api/products');
           const prodJson = await prodRes.json();
           if (prodJson.success) setProducts(prodJson.data);
+
+          
+          const catRes = await fetch('/api/categories');
+          const catJson = await catRes.json();
+          if (catJson.success) setCategories(catJson.raw);
 
           const galRes = await fetch('/api/gallery');
           const galJson = await galRes.json();
@@ -81,6 +100,110 @@ export default function AdminDashboard() {
       alert('Failed to logout. Please try again.');
     }
   };
+
+  
+  
+  const executeDelete = async () => {
+    const { id, type } = deleteModal;
+    try {
+      if (type === 'category') {
+        const res = await fetch('/api/categories/' + id, { method: 'DELETE' });
+        const json = await res.json();
+        if (json.success) setCategories(categories.filter((c) => c.id !== id));
+        else alert(json.error || 'Failed to delete category');
+      } else if (type === 'product') {
+        const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
+        const json = await res.json();
+        if (json.success) setProducts(products.filter((p) => p.id !== id));
+        else alert(json.error || 'Failed to delete product');
+      } else if (type === 'gallery') {
+        const res = await fetch(`/api/gallery/${id}`, { method: 'DELETE' });
+        const json = await res.json();
+        if (json.success) setGallery(gallery.filter((g) => g.id !== id));
+        else alert(json.error || 'Failed to delete gallery item');
+      } else if (type === 'inquiry') {
+        const res = await fetch(`/api/inquiries/${id}`, { method: 'DELETE' });
+        const json = await res.json();
+        if (json.success) setInquiries(inquiries.filter((i) => i.id !== id));
+        else alert(json.error || 'Failed to delete inquiry');
+      }
+    } catch (err) {
+      alert('Error during deletion');
+    }
+    setDeleteModal({ isOpen: false, id: null, type: '', message: '' });
+  };
+
+  const handleSettingsSubmit = async (e) => {
+    e.preventDefault();
+    if (settingsForm.newPassword !== settingsForm.confirmPassword) {
+      alert("New password and confirm password do not match.");
+      return;
+    }
+    
+    setUpdatingSettings(true);
+    try {
+      const res = await fetch('/api/auth/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          currentPassword: settingsForm.currentPassword,
+          newUsername: settingsForm.newUsername,
+          newPassword: settingsForm.newPassword
+        })
+      });
+      const json = await res.json();
+      
+      if (json.success) {
+        alert("Admin credentials updated successfully! Please login again with your new credentials.");
+        handleLogout();
+      } else {
+        alert(json.error || "Failed to update credentials.");
+      }
+    } catch (err) {
+      alert("Error updating credentials.");
+    } finally {
+      setUpdatingSettings(false);
+    }
+  };
+
+  // --- Categories CRUD ---
+  
+  const handleCategorySubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = editingCategoryId ? `/api/categories/${editingCategoryId}` : '/api/categories';
+      const method = editingCategoryId ? 'PUT' : 'POST';
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: categoryName })
+      });
+      const json = await res.json();
+      if (json.success) {
+        if (editingCategoryId) {
+          setCategories(categories.map(c => c.id === editingCategoryId ? json.data : c));
+        } else {
+          setCategories([json.data, ...categories]);
+        }
+        setCategoryName('');
+        setEditingCategoryId(null);
+        setShowCategoryForm(false);
+      } else {
+        alert(json.error || 'Failed to save category');
+      }
+    } catch (err) {
+      alert('Error saving category');
+    }
+  };
+
+  const handleEditCategory = (cat) => {
+    setCategoryName(cat.name);
+    setEditingCategoryId(cat.id);
+    setShowCategoryForm(true);
+  };
+
+
+  const handleDeleteCategory = (id) => setDeleteModal({ isOpen: true, id, type: 'category', message: 'Are you sure you want to delete this category?' });
 
   // --- Products CRUD Operations ---
   const handleProductSubmit = async (e) => {
@@ -128,20 +251,7 @@ export default function AdminDashboard() {
     setShowProductForm(true);
   };
 
-  const handleDeleteProduct = async (id) => {
-    if (!confirm('Are you sure you want to delete this product?')) return;
-    try {
-      const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
-      const json = await res.json();
-      if (json.success) {
-        setProducts(products.filter((p) => p.id !== id));
-      } else {
-        alert(json.error || 'Failed to delete product');
-      }
-    } catch (err) {
-      alert('Error deleting product');
-    }
-  };
+  const handleDeleteProduct = (id) => setDeleteModal({ isOpen: true, id, type: 'product', message: 'Are you sure you want to delete this product? All details will be lost.' });
 
   // --- Gallery Operations ---
   const handleGallerySubmit = async (e) => {
@@ -212,7 +322,16 @@ export default function AdminDashboard() {
             <LayoutDashboard size={18} />
             <span>Manage Products</span>
           </button>
+          
           <button
+            className={`${styles.tabBtn} ${activeTab === 'categories' ? styles.activeTabBtn : ''}`}
+            onClick={() => setActiveTab('categories')}
+          >
+            <Tags size={18} />
+            <span>Manage Categories</span>
+          </button>
+
+<button
             className={`${styles.tabBtn} ${activeTab === 'inquiries' ? styles.activeTabBtn : ''}`}
             onClick={() => setActiveTab('inquiries')}
           >
@@ -226,15 +345,172 @@ export default function AdminDashboard() {
             <Image size={18} />
             <span>Manage Gallery</span>
           </button>
+          <button
+            className={`${styles.tabBtn} ${activeTab === 'settings' ? styles.activeTabBtn : ''}`}
+            onClick={() => setActiveTab('settings')}
+          >
+            <Settings size={18} />
+            <span>Settings</span>
+          </button>
         </div>
+
+        {/* --- SETTINGS TAB VIEW --- */}
+        {activeTab === 'settings' && (
+          <div>
+            <div className={styles.actionsBar}>
+              <h2>Admin Account Settings</h2>
+            </div>
+            <div className={styles.adminFormCard}>
+              <h2>Change Username & Password</h2>
+              <p style={{ marginBottom: '1.5rem', color: 'var(--light-text)', fontSize: '0.9rem' }}>
+                Update your login credentials here. You will be automatically logged out after a successful update and required to sign in again.
+              </p>
+              <form onSubmit={handleSettingsSubmit} style={{ maxWidth: '500px' }}>
+                <div className="form-group">
+                  <label className="form-label">Current Password</label>
+                  <input
+                    type="password"
+                    className="form-input"
+                    placeholder="Enter current password"
+                    value={settingsForm.currentPassword}
+                    onChange={(e) => setSettingsForm({ ...settingsForm, currentPassword: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">New Username</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    placeholder="Enter new username"
+                    value={settingsForm.newUsername}
+                    onChange={(e) => setSettingsForm({ ...settingsForm, newUsername: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">New Password</label>
+                  <input
+                    type="password"
+                    className="form-input"
+                    placeholder="Enter new password"
+                    value={settingsForm.newPassword}
+                    onChange={(e) => setSettingsForm({ ...settingsForm, newPassword: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Confirm New Password</label>
+                  <input
+                    type="password"
+                    className="form-input"
+                    placeholder="Confirm new password"
+                    value={settingsForm.confirmPassword}
+                    onChange={(e) => setSettingsForm({ ...settingsForm, confirmPassword: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className={styles.formActions}>
+                  <button type="button" onClick={() => setSettingsForm({ currentPassword: '', newUsername: '', newPassword: '', confirmPassword: '' })} className="btn btn-secondary">Clear</button>
+                  <button type="submit" className="btn btn-primary" disabled={updatingSettings}>
+                    <Save size={16} /> 
+                    <span>{updatingSettings ? 'Updating...' : 'Update Credentials'}</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* --- CATEGORIES TAB VIEW --- */}
+        {activeTab === 'categories' && (
+          <div>
+            <div className={styles.actionsBar}>
+              <h2>Product Categories ({categories.length})</h2>
+              {!showCategoryForm && (
+                <button onClick={() => setShowCategoryForm(true)} className="btn btn-primary">
+                  <Plus size={16} />
+                  <span>Add Category</span>
+                </button>
+              )}
+            </div>
+
+            {showCategoryForm && (
+              <div className={styles.adminFormCard}>
+                <h2>{editingCategoryId ? 'Edit Category' : 'Add New Category'}</h2>
+                <form onSubmit={handleCategorySubmit}>
+                  <div className="form-group">
+                    <label className="form-label">Category Name</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      placeholder="e.g., Organic Fertilizers"
+                      value={categoryName}
+                      onChange={(e) => setCategoryName(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className={styles.formActions}>
+                    <button type="button" onClick={() => { setShowCategoryForm(false); setCategoryName(''); setEditingCategoryId(null); }} className="btn btn-secondary">Cancel</button>
+                    <button type="submit" className="btn btn-primary"><Save size={16} /> {editingCategoryId ? "Update Category" : "Save Category"}</button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            <div className={styles.tableWrapper}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Category Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {categories.map((c) => (
+                    <tr key={c.id}>
+                      <td style={{ width: '80px' }}>{c.id}</td>
+                      <td><div className={styles.productName}>{c.name}</div></td>
+                      <td style={{ width: '100px' }}>
+                        <div className={styles.actionBtns}>
+                          <button onClick={() => handleEditCategory(c)} className={`${styles.iconBtn} ${styles.editBtn}`} title="Edit">
+                            <Edit size={14} />
+                          </button>
+                          <button onClick={() => handleDeleteCategory(c.id)} className={`${styles.iconBtn} ${styles.deleteBtn}`} title="Delete">
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
 
         {/* --- PRODUCTS TAB VIEW --- */}
         {activeTab === 'products' && (
           <div>
             <div className={styles.actionsBar}>
-              <h2>Product Catalog ({products.length})</h2>
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <h2 style={{ margin: 0 }}>Product Catalog ({products.length})</h2>
+                <select 
+                  value={productFilter} 
+                  onChange={(e) => setProductFilter(e.target.value)}
+                  className="form-input"
+                  style={{ width: 'auto', marginBottom: 0, padding: '0.4rem 2rem 0.4rem 1rem', height: '36px' }}
+                >
+                  <option value="All">All Categories</option>
+                  {categories.map(c => (
+                    <option key={c.id} value={c.name}>{c.name}</option>
+                  ))}
+                </select>
+              </div>
+
               {!showProductForm && (
-                <button onClick={() => { setIsEditing(false); setShowProductForm(true); }} className="btn btn-primary">
+                <button onClick={() => { setIsEditing(false); setShowProductForm(true); }} className="btn btn-primary" style={{ height: '36px' }}>
                   <Plus size={16} />
                   <span>Add Product</span>
                 </button>
@@ -252,24 +528,28 @@ export default function AdminDashboard() {
                       <input
                         type="text"
                         className="form-input"
-                        placeholder="e.g., EverGrow Nitro-Mag"
-                        value={productForm.name}
+                        placeholder="e.g., Clevora Agro Nitro-Mag"
+                        value={productForm.name || ''}
                         onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
                         required
                       />
                     </div>
                     <div className="form-group" style={{ marginBottom: 0 }}>
                       <label className="form-label">Product Category</label>
-                      <select
-                        className="form-select"
-                        value={productForm.category}
+                      <input
+                        type="text"
+                        list="category-options"
+                        className="form-input"
+                        placeholder="Select or type a new category"
+                        value={productForm.category || ''}
                         onChange={(e) => setProductForm({ ...productForm, category: e.target.value })}
-                      >
-                        <option value="Secondary Nutrients">Secondary Nutrients</option>
-                        <option value="Water Soluble Fertilizers">Water Soluble Fertilizers</option>
-                        <option value="Liquid Fertilizers">Liquid Fertilizers</option>
-                        <option value="Bio-Stimulants">Bio-Stimulants</option>
-                      </select>
+                        required
+                      />
+                      <datalist id="category-options">
+                        {categories.map(cat => (
+                          <option key={cat.id} value={cat.name} />
+                        ))}
+                      </datalist>
                     </div>
                   </div>
 
@@ -291,7 +571,7 @@ export default function AdminDashboard() {
                         type="text"
                         className="form-input"
                         placeholder="e.g., 1 Kg, 5 Kg, 25 Kg bags"
-                        value={productForm.packaging}
+                        value={productForm.packaging || ''}
                         onChange={(e) => setProductForm({ ...productForm, packaging: e.target.value })}
                       />
                     </div>
@@ -301,7 +581,7 @@ export default function AdminDashboard() {
                         type="text"
                         className="form-input"
                         placeholder="e.g., 2-3 g/L foliar spray"
-                        value={productForm.usage}
+                        value={productForm.usage || ''}
                         onChange={(e) => setProductForm({ ...productForm, usage: e.target.value })}
                       />
                     </div>
@@ -395,9 +675,9 @@ export default function AdminDashboard() {
             )}
 
             {/* Products Table List */}
-            {products.length === 0 ? (
+            {(productFilter === 'All' ? products : products.filter(p => p.category === productFilter)).length === 0 ? (
               <div style={{ textAlign: 'center', padding: '3rem', background: '#fff', borderRadius: '8px' }}>
-                <p>No products registered yet. Click 'Add Product' above.</p>
+                <p>{products.length === 0 ? "No products registered yet. Click 'Add Product' above." : "No products found for this category filter."}</p>
               </div>
             ) : (
               <div className={styles.tableWrapper}>
@@ -412,7 +692,9 @@ export default function AdminDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {products.map((p) => (
+                    
+                    {(productFilter === 'All' ? products : products.filter(p => p.category === productFilter)).map((p) => (
+
                       <tr key={p.id}>
                         <td style={{ width: '80px' }}>
                           <img
@@ -464,6 +746,7 @@ export default function AdminDashboard() {
                       <th>Sender Info</th>
                       <th>Subject & Message</th>
                       <th>Date</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -486,6 +769,15 @@ export default function AdminDashboard() {
                             hour: '2-digit',
                             minute: '2-digit'
                           })}
+                        </td>
+                        <td style={{ width: '80px', textAlign: 'center' }}>
+                          <button 
+                            onClick={() => setDeleteModal({ isOpen: true, id: inq.id, type: 'inquiry', message: 'Are you sure you want to delete this inquiry?' })} 
+                            className={`${styles.iconBtn} ${styles.deleteBtn}`} 
+                            title="Delete Inquiry"
+                          >
+                            <Trash2 size={14} />
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -662,20 +954,7 @@ export default function AdminDashboard() {
                       />
                     )}
                     <button
-                      onClick={async () => {
-                        if (!confirm('Are you sure you want to delete this gallery item?')) return;
-                        try {
-                          const res = await fetch(`/api/gallery/${item.id}`, { method: 'DELETE' });
-                          const json = await res.json();
-                          if (json.success) {
-                            setGallery(gallery.filter((g) => g.id !== item.id));
-                          } else {
-                            alert(json.error || 'Failed to delete gallery item');
-                          }
-                        } catch (err) {
-                          alert('Error deleting gallery item');
-                        }
-                      }}
+                      onClick={() => setDeleteModal({ isOpen: true, id: item.id, type: 'gallery', message: 'Are you sure you want to remove this media from the gallery?' })}
                       style={{
                         position: 'absolute',
                         top: '10px',
@@ -723,6 +1002,46 @@ export default function AdminDashboard() {
             )}
           </div>
         )}
+        {/* --- CUSTOM DELETE CONFIRMATION MODAL --- */}
+        {deleteModal.isOpen && (
+          <div style={{
+            position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
+            background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999
+          }}>
+            <div style={{
+              background: '#fff', padding: '2rem', borderRadius: '12px',
+              maxWidth: '400px', width: '90%', textAlign: 'center',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+            }}>
+              <div style={{
+                background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444',
+                width: '60px', height: '60px', borderRadius: '50%',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                margin: '0 auto 1.5rem auto'
+              }}>
+                <Trash2 size={30} />
+              </div>
+              <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.25rem', color: 'var(--text-dark)' }}>Confirm Deletion</h3>
+              <p style={{ color: 'var(--light-text)', marginBottom: '2rem' }}>{deleteModal.message}</p>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                <button 
+                  onClick={() => setDeleteModal({ isOpen: false, id: null, type: '', message: '' })}
+                  className="btn btn-secondary" style={{ flex: 1 }}
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={executeDelete}
+                  className="btn btn-primary" style={{ background: '#ef4444', border: 'none', flex: 1 }}
+                >
+                  Yes, Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );

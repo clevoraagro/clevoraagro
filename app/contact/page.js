@@ -56,7 +56,7 @@ export default function Contact() {
       {/* Page Banner */}
       <section className="page-banner">
         <h1>Contact Us</h1>
-        <p>Get in touch with Evergrow Crop Science Pvt Ltd for orders, distributorships, or nutrient queries.</p>
+        <p>Get in touch with Clevora Agro for orders, distributorships, or nutrient queries.</p>
       </section>
 
       {/* Main Section */}
@@ -78,7 +78,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3>Office Address</h3>
-                    <p>Shop No. F-6, Vegetable Dept, Marketing Yard, Rajkot - 360003, Gujarat, India.</p>
+                    <p>Head Office: TF-08 Shivam Trade Center, Nr. Khiskoli Circle, Atladara, Vadodara-390012</p>
                   </div>
                 </li>
                 <li className={styles.contactItem}>
@@ -87,7 +87,10 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3>Phone Support</h3>
-                    <p>+91 63592 77733</p>
+                    <p>
+                      Harsh Shah: <a href="tel:+919998692979" style={{ color: 'inherit', textDecoration: 'none' }}>+91 99986 92979</a><br />
+                      Hiren Shah: <a href="tel:+918128983340" style={{ color: 'inherit', textDecoration: 'none' }}>+91 81289 83340</a>
+                    </p>
                   </div>
                 </li>
                 <li className={styles.contactItem}>
@@ -96,7 +99,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3>Email Address</h3>
-                    <p>evergrowcspl@gmail.com</p>
+                    <p><a href="mailto:info@clevoraagro.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@clevoraagro.com</a></p>
                   </div>
                 </li>
                 <li className={styles.contactItem}>
@@ -113,8 +116,8 @@ export default function Contact() {
               {/* Map Placeholder */}
               <div className={styles.mapPlaceholder}>
                 <MapPin size={32} />
-                <p>Marketing Yard, Rajkot, Gujarat</p>
-                <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>GPS Coordinate: 22.3000&deg; N, 70.7833&deg; E</span>
+                <p>Atladara, Vadodara, Gujarat</p>
+                <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>GPS Coordinate: 22.2882&deg; N, 73.1672&deg; E</span>
               </div>
             </div>
 

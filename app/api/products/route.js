@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { prisma } from '../../lib/db';
 import { isAdminAuthenticated } from '../../lib/auth';
 
+export const revalidate = 60; // ISR Caching
+
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);

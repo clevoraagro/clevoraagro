@@ -88,6 +88,23 @@
   color: var(--light-text);
 }
 
+/* Section Header */
+.sectionHeader {
+  margin-bottom: 4rem;
+  max-width: 800px;
+}
+
+.sectionHeader h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem; /* Increased gap */
+}
+
+.sectionHeader p {
+  color: var(--light-text);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
 /* Core Values */
 .valuesSection {
   padding: 5rem 0;
@@ -102,12 +119,37 @@
 
 .valueCard {
   text-align: center;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.valueCard:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
 }
 
 .valueIcon {
-  color: var(--accent-gold);
-  margin-bottom: 1.2rem;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--primary-glow);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+  transition: var(--transition-normal);
+}
+
+.valueCard:hover .valueIcon {
+  background: var(--green-gradient);
+  color: var(--white);
+  transform: rotateY(180deg);
 }
 
 .valueCard h3 {

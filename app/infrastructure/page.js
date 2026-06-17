@@ -2,8 +2,8 @@ import { CheckCircle2, FlaskConical, Scale, Container, ShieldCheck, Warehouse } 
 import styles from './infra.module.css';
 
 export const metadata = {
-  title: "Infrastructure & Quality | Evergrow Crop Science Pvt Ltd",
-  description: "Learn about the advanced laboratory testing and manufacturing infrastructure that ensures Evergrow CSPL products achieve premium quality.",
+  title: "Infrastructure & Quality | Clevora Agro",
+  description: "Learn about the advanced laboratory testing and manufacturing infrastructure that ensures Clevora Agro products achieve premium quality.",
 };
 
 export default function Infrastructure() {
@@ -50,7 +50,7 @@ export default function Infrastructure() {
               <span className="badge badge-primary" style={{ marginBottom: '1rem' }}>Production Excellence</span>
               <h2>Premium Infrastructure for High-Yield Formulations</h2>
               <p>
-                At Evergrow Crop Science, we believe that crop protection and nutrition are sciences of exact margins. Even minor chemical imbalances can lead to root toxicity or foliar scorch. That is why we have invested in modern manufacturing machinery.
+                At Clevora Agro, we believe that crop protection and nutrition are sciences of exact margins. Even minor chemical imbalances can lead to root toxicity or foliar scorch. That is why we have invested in modern manufacturing machinery.
               </p>
               <p>
                 Our manufacturing facilities house automated double-cone blenders, dust-free dry powder packing machinery, and dynamic liquid bottling lines. This level of automation keeps batch-to-batch variance under 0.1%, offering farmers predictable, high-potency inputs.

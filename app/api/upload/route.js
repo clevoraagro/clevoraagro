@@ -28,6 +28,20 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: 'No file uploaded' }, { status: 400 });
     }
 
+    // Phase 4: Secure File Uploads (Strict Validation)
+    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml', 'video/mp4', 'video/webm'];
+    if (!allowedMimeTypes.includes(file.type)) {
+      return NextResponse.json({ success: false, error: 'Invalid file type. Only images and videos are allowed.' }, { status: 415 });
+    }
+
+    // Enforce size limits: 10MB for images, 50MB for videos
+    const isVideo = file.type.startsWith('video/');
+    const maxSize = isVideo ? 50 * 1024 * 1024 : 10 * 1024 * 1024;
+    
+    if (file.size > maxSize) {
+      return NextResponse.json({ success: false, error: `File is too large. Max size is ${isVideo ? '50MB' : '10MB'}.` }, { status: 413 });
+    }
+
     // 4. Convert file to binary buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);

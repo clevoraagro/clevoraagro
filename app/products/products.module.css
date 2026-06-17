@@ -41,7 +41,7 @@
   border: 1px solid var(--border-color);
   padding: 0.6rem 1.2rem;
   border-radius: var(--radius-sm);
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   color: var(--light-text);
@@ -69,7 +69,7 @@
 
 .productsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
@@ -79,7 +79,7 @@
 
 .productImage {
   background: var(--primary-glow);
-  height: 260px;
+  height: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,6 +95,12 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transform: scale(1.15);
+  transition: transform 0.4s ease;
+}
+
+.productCard:hover .productImage img {
+  transform: scale(1.22);
 }
 
 .productInfo {
@@ -271,7 +277,7 @@
 
 @media (max-width: 1200px) {
   .productsGrid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

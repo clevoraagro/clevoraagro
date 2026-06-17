@@ -3,18 +3,18 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
+  height: 85px;
   display: flex;
   align-items: center;
   z-index: 1000;
   transition: var(--transition-normal);
+  background: var(--white);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .scrolled {
-  height: 70px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  height: 80px;
+  background: var(--white);
   box-shadow: var(--shadow-md);
   border-bottom: 1px solid var(--border-color);
 }
@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   font-weight: 800;
   font-size: 1.4rem;
   color: var(--primary-deep);
@@ -43,28 +43,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--green-gradient);
-  color: var(--white);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-sm);
-  transform: rotate(45deg);
   transition: var(--transition-normal);
 }
 
-.logoIcon > svg {
-  transform: rotate(-45deg);
-}
-
 .logo:hover .logoIcon {
-  transform: rotate(90deg);
+  transform: scale(1.05);
 }
 
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.6rem;
   list-style: none;
 }
 
@@ -73,9 +62,9 @@
 }
 
 .navLink {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1.0rem;
   color: var(--light-text);
   padding: 0.5rem 0.2rem;
   display: block;
@@ -177,7 +166,7 @@
 .dropdownLink {
   display: block;
   padding: 0.7rem 1.2rem;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   color: var(--light-text);

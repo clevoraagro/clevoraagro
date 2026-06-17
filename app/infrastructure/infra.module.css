@@ -75,7 +75,7 @@
   border-radius: var(--radius-sm);
   background: var(--gold-gradient);
   color: var(--white);
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   font-weight: 800;
   font-size: 1.25rem;
   display: flex;

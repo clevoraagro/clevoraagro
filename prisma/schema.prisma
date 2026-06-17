@@ -46,3 +46,9 @@ model GalleryItem {
   type      String   @default("image") // 'image' or 'video'
   createdAt DateTime @default(now())
 }
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+}

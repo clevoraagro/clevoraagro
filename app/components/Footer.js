@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Sprout, MapPin, Phone, Mail, Clock, ArrowRight, Globe, MessageCircle, Camera, Briefcase } from 'lucide-react';
 import styles from './Footer.module.css';
 
@@ -12,13 +13,12 @@ export default function Footer() {
           {/* Col 1: Brand Info */}
           <div className={styles.col}>
             <div className={styles.logo}>
-              <div className={styles.logoIcon}>
-                <Sprout size={22} />
+              <div className={styles.logoIcon} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginLeft: '-5px' }}>
+                <Image src="/logo.png" alt="Clevora Agro Logo" width={180} height={70} style={{ height: '70px', width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)', transform: 'scale(1.4)', transformOrigin: 'left center' }} />
               </div>
-              <span>EverGrow</span>
             </div>
             <p className={styles.aboutText}>
-              Evergrow Crop Science Private Limited is committed to redefining agricultural productivity through premium-grade crop nutrients, soluble fertilizers, and organic bio-stimulants.
+              Clevora Agro is committed to redefining agricultural productivity through premium-grade crop nutrients, soluble fertilizers, and organic bio-stimulants.
             </p>
             <div className={styles.socials}>
               <a href="#" className={styles.socialIcon} aria-label="Website"><Globe size={18} /></a>
@@ -57,15 +57,18 @@ export default function Footer() {
             <ul className={styles.contactInfo}>
               <li>
                 <MapPin size={20} />
-                <span>Shop No. F-6, Vegetable Dept,<br />Marketing Yard, Rajkot - 360003,<br />Gujarat, India.</span>
+                <span>Head Office: TF-08 Shivam Trade Center, Nr. Khiskoli Circle, Atladara, Vadodara-390012</span>
               </li>
               <li>
                 <Phone size={18} />
-                <span>+91 63592 77733</span>
+                <span>
+                  Harsh Shah: <a href="tel:+919998692979" style={{ color: 'inherit', textDecoration: 'none' }}>+91 99986 92979</a><br />
+                  Hiren Shah: <a href="tel:+918128983340" style={{ color: 'inherit', textDecoration: 'none' }}>+91 81289 83340</a>
+                </span>
               </li>
               <li>
                 <Mail size={18} />
-                <span>evergrowcspl@gmail.com</span>
+                <span><a href="mailto:info@clevoraagro.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@clevoraagro.com</a></span>
               </li>
               <li>
                 <Clock size={18} />
@@ -76,7 +79,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p>&copy; {currentYear} Evergrow Crop Science Private Limited. All Rights Reserved.</p>
+          <p>&copy; {currentYear} Clevora Agro. All Rights Reserved.</p>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
             <span style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.75)' }}>Powered by</span>
             <span style={{ fontWeight: 600, color: 'var(--accent-gold)' }}>TejasKP AI Software</span>

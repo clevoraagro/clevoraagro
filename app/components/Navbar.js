@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Sprout, Menu, X, PhoneCall, ChevronDown } from 'lucide-react';
 import styles from './Navbar.module.css';
@@ -9,7 +10,6 @@ import styles from './Navbar.module.css';
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -27,22 +27,12 @@ export default function Navbar() {
   // Close mobile menus when route changes
   useEffect(() => {
     setMenuOpen(false);
-    setMobileDropdownOpen(false);
   }, [pathname]);
 
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    {
-      name: 'Products',
-      path: '/products',
-      dropdown: [
-        { name: 'Secondary Nutrients', path: '/products?category=Secondary%20Nutrients' },
-        { name: 'Water Soluble Fertilizers', path: '/products?category=Water%20Soluble%20Fertilizers' },
-        { name: 'Liquid Fertilizers', path: '/products?category=Liquid%20Fertilizers' },
-        { name: 'Bio-Stimulants', path: '/products?category=Bio-Stimulants' }
-      ]
-    },
+    { name: 'Products', path: '/products' },
     { name: 'Infrastructure', path: '/infrastructure' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Contact', path: '/contact' },
@@ -53,10 +43,9 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <Sprout size={24} />
+          <div className={styles.logoIcon} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginLeft: '-5px' }}>
+            <Image src="/logo.png" alt="Clevora Agro Logo" width={180} height={75} style={{ height: '75px', width: 'auto', objectFit: 'contain', transform: 'scale(1.3)', transformOrigin: 'left center' }} priority />
           </div>
-          <span>EverGrow</span>
         </Link>
 
         <ul className={`${styles.navLinks} ${menuOpen ? styles.activeMenu : ''}`}>

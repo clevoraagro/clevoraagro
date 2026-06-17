@@ -19,8 +19,22 @@ function ProductsCatalog() {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [categories, setCategories] = useState(['All', 'Secondary Nutrients', 'Water Soluble Fertilizers', 'Liquid Fertilizers', 'Bio-Stimulants']);
 
-  const categories = ['All', 'Secondary Nutrients', 'Water Soluble Fertilizers', 'Liquid Fertilizers', 'Bio-Stimulants'];
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch('/api/categories');
+        const json = await res.json();
+        if (json.success) {
+          setCategories(['All', ...json.data]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch categories", err);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   // Update selectedCategory state if searchParams change
   useEffect(() => {
@@ -78,8 +92,9 @@ function ProductsCatalog() {
   };
 
   return (
-    <div className="animate-fade">
-      {/* Page Banner */}
+    <>
+      <div className="animate-fade">
+        {/* Page Banner */}
       <section className="page-banner">
         <h1>Our Crop Nutrition Range</h1>
         <p>Premium grade fertilizers, secondary minerals, and bio-stimulants for high-yield farming.</p>
@@ -149,7 +164,6 @@ function ProductsCatalog() {
                   <div className={styles.productInfo}>
                     <div className={styles.productCategory}>{product.category}</div>
                     <h3>{product.name}</h3>
-                    <p className={styles.productDesc}>{product.description || ''}</p>
                     <div className={styles.cardFooter}>
                       <span>View Details</span>
                       <Info size={16} />
@@ -161,6 +175,7 @@ function ProductsCatalog() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* Product Detail Modal Overlay */}
       {selectedProduct && (
@@ -207,7 +222,7 @@ function ProductsCatalog() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

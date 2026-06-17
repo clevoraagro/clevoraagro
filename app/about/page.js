@@ -2,8 +2,8 @@ import { Eye, Target, Sparkles, ShieldAlert, HeartHandshake, Compass, UserCheck 
 import styles from './about.module.css';
 
 export const metadata = {
-  title: "About Us | Evergrow Crop Science Pvt Ltd",
-  description: "Learn about the mission, vision, core values, and executive leadership of Evergrow Crop Science Private Limited (CSPL) based in Rajkot, Gujarat.",
+  title: "About Us | Clevora Agro",
+  description: "Learn about the mission, vision, core values, and executive leadership of Clevora Agro based in Vadodara, Gujarat.",
 };
 
 export default function About() {
@@ -11,39 +11,39 @@ export default function About() {
     {
       name: 'Atul Valjibhai Parsana',
       role: 'Managing Director',
-      bio: 'Atul oversees the strategic direction, international vendor partnerships, and market scaling initiatives. He brings over two decades of agricultural distribution expertise.'
+      bio: 'Leads the company\'s strategic growth, business development, and market expansion while fostering strong industry partnerships.'
     },
     {
       name: 'Monikaben Rabadiya',
       role: 'Technical Director',
-      bio: 'Monika directs the laboratory formulations, research pipelines, and quality assurance processes. She holds an advanced degree in Agronomy.'
+      bio: 'Oversees product development, research initiatives, and quality assurance to ensure consistent performance and innovation.'
     },
     {
       name: 'Jill Atulbhai Parsana',
       role: 'Operations Director',
-      bio: 'Jill manages supply chain logistics, state-level distributor networks, and direct-to-farmer support initiatives, ensuring efficient batch delivery.'
+      bio: 'Manages manufacturing operations, supply chain efficiency, and customer support systems to ensure seamless product delivery.'
     }
   ];
 
   const values = [
     {
-      name: 'Integrity',
-      desc: 'We guarantee transparency in our product formulations, ensuring farmers get exactly what is labeled.',
+      name: 'Quality',
+      desc: 'We maintain high standards in sourcing, manufacturing, and quality control to deliver reliable agricultural solutions.',
       icon: <ShieldAlert size={28} />
     },
     {
       name: 'Innovation',
-      desc: 'Constantly engineering bio-stimulants and micronutrients that solve modern soil depletion problems.',
+      desc: 'We continuously develop advanced crop nutrition and plant health products to meet evolving farming challenges.',
       icon: <Sparkles size={28} />
     },
     {
       name: 'Sustainability',
-      desc: 'Developing solutions that leave no hazardous residues, preserving soil microbiology for generations.',
+      desc: 'Our focus is on responsible agricultural practices that support long-term soil fertility and environmental well-being.',
       icon: <Compass size={28} />
     },
     {
-      name: 'Customer Support',
-      desc: 'Helping farmers step-by-step with crop nutrition guides, ensuring high ROI for their agro inputs.',
+      name: 'Farmer First',
+      desc: 'We work closely with growers, providing practical solutions and technical guidance to help maximize farm productivity.',
       icon: <HeartHandshake size={28} />
     }
   ];
@@ -52,7 +52,7 @@ export default function About() {
     <div className="animate-fade">
       {/* Page Banner */}
       <section className="page-banner">
-        <h1>About Our Company</h1>
+        <h1>Discover Our Journey</h1>
         <p>Pioneering scientific crop nutrition to deliver sustainable agricultural growth across India.</p>
       </section>
 
@@ -68,15 +68,15 @@ export default function About() {
             </div>
             <div className={styles.profileText}>
               <span className="badge badge-primary" style={{ marginBottom: '1rem' }}>Corporate Profile</span>
-              <h2>Scientific Inputs for Zero-Impure Yields</h2>
+              <h2>Advanced Agricultural Solutions for Modern Farming</h2>
               <p>
-                Incorporated in February 2024 under the Companies Act of India, **Evergrow Crop Science Private Limited (CSPL)** has rapidly established itself as a trusted manufacturer and wholesaler of high-grade agro-nutrition inputs in Rajkot, Gujarat.
+                Established with a vision to support progressive agriculture, our company has emerged as a trusted manufacturer and supplier of premium crop nutrition and plant health products. Based in India, we are committed to delivering innovative agricultural inputs that help farmers achieve consistent and sustainable results.
               </p>
               <p>
-                Our core manufacturing philosophy is rooted in precision chemical mapping. We analyze soil deficiencies in regional crop belts and custom-formulate water-soluble NPK combinations, chelated secondary minerals, and bio-stimulants to correct targeted deficiencies.
+                Our development approach is driven by research and field performance. By understanding crop requirements and soil conditions, we formulate specialized fertilizers, micronutrients, and growth enhancers designed to improve nutrient efficiency and overall crop productivity.
               </p>
               <div className={styles.highlightCard}>
-                Registered Corporate Entity: U46692GJ2024PTC149158 (Active Private Limited Company)
+                Registered Corporate Entity: Active Private Limited Company under the Companies Act of India
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function About() {
               </div>
               <h3>Our Vision</h3>
               <p>
-                To become India's leading provider of smart, eco-safe agricultural nutrients. We envision a future where high-yield farming works in absolute synergy with soil ecology, ensuring food security without environmental degradation.
+                To be a trusted leader in agricultural innovation by providing sustainable crop nutrition solutions that enhance farm productivity while preserving soil health. We envision a future where profitable farming and environmental responsibility grow together.
               </p>
             </div>
             <div className={styles.vmCard}>
@@ -102,7 +102,7 @@ export default function About() {
               </div>
               <h3>Our Mission</h3>
               <p>
-                To engineer premium, cost-effective agricultural inputs. We accomplish this by utilizing advanced spray-drying technology, sourcing verified raw materials, and delivering localized, crop-specific consulting to farmers.
+                To develop high-quality, value-driven agricultural products through continuous research, advanced manufacturing practices, and reliable raw materials. We are committed to empowering farmers with effective crop solutions and expert support tailored to local farming needs.
               </p>
             </div>
           </div>
@@ -112,10 +112,10 @@ export default function About() {
       {/* Core Values */}
       <section className={styles.valuesSection}>
         <div className="container">
-          <div className="sectionHeader">
-            <span className="badge badge-gold" style={{ marginBottom: '1rem' }}>Core Pillars</span>
-            <h2>The Values That Drive Us</h2>
-            <p>Our daily operations and corporate culture are guided by these fundamental principles.</p>
+          <div className={styles.sectionHeader}>
+            <span className="badge badge-gold" style={{ marginBottom: '1rem' }}>Core Values</span>
+            <h2>The Principles Behind Our Success</h2>
+            <p>Our commitment to excellence is built on a strong foundation of values that guide every decision, product, and customer relationship.</p>
           </div>
           <div className={styles.valuesGrid}>
             {values.map((v) => (
@@ -134,10 +134,10 @@ export default function About() {
       {/* Directors Section */}
       <section className={styles.directorsSection}>
         <div className="container">
-          <div className="sectionHeader">
-            <span className="badge badge-primary" style={{ marginBottom: '1rem' }}>Executive Leadership</span>
-            <h2>Our Board of Directors</h2>
-            <p>Meet the visionary leaders driving Evergrow Crop Science toward agricultural innovation.</p>
+          <div className={styles.sectionHeader}>
+            <span className="badge badge-primary" style={{ marginBottom: '1rem' }}>Leadership Team</span>
+            <h2>Visionaries Driving Growth and Innovation</h2>
+            <p>Meet the dedicated professionals leading our organization with expertise, integrity, and a passion for advancing agriculture.</p>
           </div>
           <div className={styles.directorsGrid}>
             {directors.map((dir) => (
