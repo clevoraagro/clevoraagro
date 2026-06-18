@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Search, Package, Sprout, Info, X, Leaf } from 'lucide-react';
 import styles from './products.module.css';
 
@@ -156,7 +157,7 @@ function ProductsCatalog() {
                 >
                   <div className={styles.productImage}>
                     {product.image ? (
-                      <img src={product.image} alt={product.name} />
+                      <Image src={product.image} alt={product.name} fill style={{ objectFit: 'contain' }} sizes="(max-width: 768px) 100vw, 33vw" />
                     ) : (
                       <Leaf size={48} />
                     )}
@@ -186,7 +187,7 @@ function ProductsCatalog() {
             </button>
             <div className={styles.modalImage}>
               {selectedProduct.image ? (
-                <img src={selectedProduct.image} alt={selectedProduct.name} />
+                <Image src={selectedProduct.image} alt={selectedProduct.name} fill style={{ objectFit: 'contain' }} sizes="(max-width: 768px) 100vw, 700px" />
               ) : (
                 <Leaf size={64} />
               )}

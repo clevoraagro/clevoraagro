@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import NextImage from 'next/image';
 import { Image, Video, Maximize2, X } from 'lucide-react';
 import styles from './gallery.module.css';
 
@@ -99,7 +100,7 @@ export default function Gallery() {
                   className={styles.itemCard}
                   onClick={() => setLightboxItem(item)}
                 >
-                  <img src={item.url} alt={item.title} />
+                  <NextImage src={item.url} alt={item.title} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 33vw" />
                   <div className={styles.overlay}>
                     <div className={styles.mediaType}>
                       {item.type === 'image' ? <Image size={14} style={{ display: 'inline', marginRight: '4px' }} /> : <Video size={14} style={{ display: 'inline', marginRight: '4px' }} />}
@@ -121,7 +122,7 @@ export default function Gallery() {
             <X size={24} />
           </button>
           <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
-            <img src={lightboxItem.url} alt={lightboxItem.title} />
+            <NextImage src={lightboxItem.url} alt={lightboxItem.title} fill style={{ objectFit: 'contain' }} sizes="(max-width: 768px) 100vw, 90vw" />
             <h3>{lightboxItem.title}</h3>
           </div>
         </div>
