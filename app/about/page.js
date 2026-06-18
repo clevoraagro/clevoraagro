@@ -1,4 +1,4 @@
-import { Eye, Target, Sparkles, ShieldAlert, HeartHandshake, Compass, UserCheck } from 'lucide-react';
+import { Eye, Target, Sparkles, ShieldAlert, HeartHandshake, Compass } from 'lucide-react';
 import styles from './about.module.css';
 
 export const metadata = {
@@ -7,24 +7,6 @@ export const metadata = {
 };
 
 export default function About() {
-  const directors = [
-    {
-      name: 'Atul Valjibhai Parsana',
-      role: 'Managing Director',
-      bio: 'Leads the company\'s strategic growth, business development, and market expansion while fostering strong industry partnerships.'
-    },
-    {
-      name: 'Monikaben Rabadiya',
-      role: 'Technical Director',
-      bio: 'Oversees product development, research initiatives, and quality assurance to ensure consistent performance and innovation.'
-    },
-    {
-      name: 'Jill Atulbhai Parsana',
-      role: 'Operations Director',
-      bio: 'Manages manufacturing operations, supply chain efficiency, and customer support systems to ensure seamless product delivery.'
-    }
-  ];
-
   const values = [
     {
       name: 'Quality',
@@ -131,32 +113,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Directors Section */}
-      <section className={styles.directorsSection}>
-        <div className="container">
-          <div className={styles.sectionHeader}>
-            <span className="badge badge-primary" style={{ marginBottom: '1rem' }}>Leadership Team</span>
-            <h2>Visionaries Driving Growth and Innovation</h2>
-            <p>Meet the dedicated professionals leading our organization with expertise, integrity, and a passion for advancing agriculture.</p>
-          </div>
-          <div className={styles.directorsGrid}>
-            {directors.map((dir) => (
-              <div key={dir.name} className={styles.directorCard}>
-                <div className={styles.directorAvatar}>
-                  <div className={styles.avatarCircle}>
-                    <UserCheck size={38} />
-                  </div>
-                </div>
-                <div className={styles.directorInfo}>
-                  <h3>{dir.name}</h3>
-                  <div className={styles.directorRole}>{dir.role}</div>
-                  <p className={styles.directorBio}>{dir.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

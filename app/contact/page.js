@@ -78,7 +78,11 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3>Office Address</h3>
-                    <p>Head Office: TF-08 Shivam Trade Center, Nr. Khiskoli Circle, Atladara, Vadodara-390012</p>
+                    <p>
+                      <a href="https://maps.google.com/?q=TF-08+Shivam+Trade+Center,+Nr.+Khiskoli+Circle,+Atladara,+Vadodara-390012" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+                        Head Office: TF-08 Shivam Trade Center, Nr. Khiskoli Circle, Atladara, Vadodara-390012
+                      </a>
+                    </p>
                   </div>
                 </li>
                 <li className={styles.contactItem}>
@@ -88,8 +92,7 @@ export default function Contact() {
                   <div>
                     <h3>Phone Support</h3>
                     <p>
-                      Harsh Shah: <a href="tel:+919998692979" style={{ color: 'inherit', textDecoration: 'none' }}>+91 99986 92979</a><br />
-                      Hiren Shah: <a href="tel:+918128983340" style={{ color: 'inherit', textDecoration: 'none' }}>+91 81289 83340</a>
+                      <a href="tel:+919316843628" style={{ color: 'inherit', textDecoration: 'none' }}>+91 93168 43628</a>
                     </p>
                   </div>
                 </li>
@@ -113,11 +116,17 @@ export default function Contact() {
                 </li>
               </ul>
 
-              {/* Map Placeholder */}
-              <div className={styles.mapPlaceholder}>
-                <MapPin size={32} />
-                <p>Atladara, Vadodara, Gujarat</p>
-                <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>GPS Coordinate: 22.2882&deg; N, 73.1672&deg; E</span>
+              {/* Map Iframe */}
+              <div className={styles.mapContainer}>
+                <iframe
+                  src="https://maps.google.com/maps?q=TF-08%20Shivam%20Trade%20Center,%20Nr.%20Khiskoli%20Circle,%20Atladara,%20Vadodara-390012&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
 

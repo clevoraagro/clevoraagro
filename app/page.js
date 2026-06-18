@@ -67,17 +67,17 @@ export default function Home() {
         <div className="container">
           <div className={styles.statsGrid}>
             <div className={styles.statCard}>
-              <div className={styles.statNumber}>1000+</div>
+              <div className={styles.statNumber}>10000+</div>
               <div className={styles.statLabel}>Farmers Satisfied</div>
             </div>
             <div className={styles.statCard}>
-              <div className={styles.statNumber}>50+</div>
+              <div className={styles.statNumber}>75+</div>
               <div className={styles.statLabel}>Distributor Network</div>
             </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>4+</div>
+            <Link href="/products" className={styles.statCard} style={{ display: 'block', textDecoration: 'none' }}>
+              <div className={styles.statNumber}>7+</div>
               <div className={styles.statLabel}>Product Categories</div>
-            </div>
+            </Link>
             <div className={styles.statCard}>
               <div className={styles.statNumber}>100%</div>
               <div className={styles.statLabel}>Quality Tested</div>

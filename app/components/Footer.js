@@ -57,13 +57,16 @@ export default function Footer() {
             <ul className={styles.contactInfo}>
               <li>
                 <MapPin size={20} />
-                <span>Head Office: TF-08 Shivam Trade Center, Nr. Khiskoli Circle, Atladara, Vadodara-390012</span>
+                <span>
+                  <a href="https://maps.google.com/?q=TF-08+Shivam+Trade+Center,+Nr.+Khiskoli+Circle,+Atladara,+Vadodara-390012" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+                    Head Office: TF-08 Shivam Trade Center, Nr. Khiskoli Circle, Atladara, Vadodara-390012
+                  </a>
+                </span>
               </li>
               <li>
                 <Phone size={18} />
                 <span>
-                  Harsh Shah: <a href="tel:+919998692979" style={{ color: 'inherit', textDecoration: 'none' }}>+91 99986 92979</a><br />
-                  Hiren Shah: <a href="tel:+918128983340" style={{ color: 'inherit', textDecoration: 'none' }}>+91 81289 83340</a>
+                  <a href="tel:+919316843628" style={{ color: 'inherit', textDecoration: 'none' }}>+91 93168 43628</a>
                 </span>
               </li>
               <li>

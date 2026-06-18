@@ -54,27 +54,14 @@
   line-height: 1.5;
 }
 
-/* Map placeholder placeholder */
-.mapPlaceholder {
-  height: 200px;
+/* Map iframe container */
+.mapContainer {
+  height: 250px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--bg-gradient-start);
-  border: 1px solid var(--border-color);
   margin-top: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-light);
-  gap: 0.5rem;
   box-shadow: var(--shadow-sm);
-}
-
-.mapPlaceholder p {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--primary-deep);
+  border: 1px solid var(--border-color);
 }
 
 /* Form Styles */

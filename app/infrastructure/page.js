@@ -58,8 +58,8 @@ export default function Infrastructure() {
             </div>
             <div className={styles.introImage}>
               <img
-                src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=800"
-                alt="Automated agricultural production facility"
+                src="/agro.jpg"
+                alt="Clevora Agro Production Facility"
               />
             </div>
           </div>
