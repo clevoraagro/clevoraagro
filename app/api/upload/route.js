@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { isAdminAuthenticated } from '../../lib/auth';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabaseServiceKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 export async function POST(request) {
   try {
@@ -15,7 +15,7 @@ export async function POST(request) {
 
     // 2. Verify Supabase configuration
     if (!supabaseUrl || !supabaseServiceKey) {
-      throw new Error('Supabase environment variables (NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY) are not configured.');
+      throw new Error('Supabase environment variables are not configured.');
     }
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
