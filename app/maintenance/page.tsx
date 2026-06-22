@@ -90,12 +90,15 @@ export default function MaintenancePage() {
         </p>
       </div>
       
-      <style>{`
+      <style dangerouslySetInnerHTML={{__html: `
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: .5; }
         }
-      `}</style>
+        nav, footer { display: none !important; }
+        main { padding-top: 0 !important; z-index: 999999 !important; min-height: 100vh !important; }
+        body { background-color: #f8fafc !important; overflow: hidden !important; margin: 0 !important; }
+      `}} />
     </div>
   );
 }
