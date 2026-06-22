@@ -86,7 +86,7 @@ export default function Footer() {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
             <span style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.75)' }}>Powered by</span>
             <a href="https://tejaskpaisoftware.com/" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
-              <span style={{ fontWeight: 600, color: 'var(--accent-gold)' }}>TejasKP AI Software</span>
+              <span style={{ fontWeight: 600, color: 'var(--accent-gold)' }}>TEJASKP AI SOFTWARE</span>
               <img src="/tejaskp.png" alt="TejasKP Logo" width={26} height={26} style={{ verticalAlign: 'middle', borderRadius: '4px', objectFit: 'cover' }} />
             </a>
           </div>
