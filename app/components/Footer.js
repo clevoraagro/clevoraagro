@@ -87,22 +87,7 @@ export default function Footer() {
             <span style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.75)' }}>Powered by</span>
             <a href="https://tejaskpaisoftware.com/" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
               <span style={{ fontWeight: 600, color: 'var(--accent-gold)' }}>TejasKP AI Software</span>
-              <svg width="26" height="26" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ verticalAlign: 'middle', borderRadius: '4px' }}>
-                <rect width="40" height="40" rx="4" fill="#000000" stroke="#d35400" strokeWidth="1.5" />
-                <path d="M5 5H35V35H5V5Z" stroke="#e67e22" strokeWidth="0.8" strokeDasharray="3 2" />
-                <circle cx="20" cy="17" r="5" stroke="#f39c12" strokeWidth="1.5" />
-                <circle cx="20" cy="17" r="2" fill="#f1c40f" />
-                <path d="M20 7V12" stroke="#f39c12" strokeWidth="1" />
-                <path d="M20 22V27" stroke="#f39c12" strokeWidth="1" />
-                <path d="M10 17H15" stroke="#f39c12" strokeWidth="1" />
-                <path d="M25 17H30" stroke="#f39c12" strokeWidth="1" />
-                <path d="M13 10L16.5 13.5" stroke="#f39c12" strokeWidth="1" />
-                <path d="M27 24L23.5 20.5" stroke="#f39c12" strokeWidth="1" />
-                <path d="M27 10L23.5 13.5" stroke="#f39c12" strokeWidth="1" />
-                <path d="M13 24L16.5 20.5" stroke="#f39c12" strokeWidth="1" />
-                <text x="20" y="31" fill="#f1c40f" fontSize="4.2" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TEJASKP</text>
-                <text x="20" y="36" fill="#f1c40f" fontSize="3.6" fontFamily="monospace" fontWeight="bold" textAnchor="middle">AI SOFTWARE</text>
-              </svg>
+              <img src="/tejaskp.png" alt="TejasKP Logo" width={26} height={26} style={{ verticalAlign: 'middle', borderRadius: '4px', objectFit: 'cover' }} />
             </a>
           </div>
         </div>
