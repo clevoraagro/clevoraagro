@@ -40,7 +40,7 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/((?!maintenance|_next|favicon.ico).*)',
+        source: '/((?!maintenance|_next|favicon.ico|.*\\.(?:png|jpg|jpeg|svg|gif|webp|avif)$).*)',
         destination: '/maintenance',
         permanent: false,
       },
