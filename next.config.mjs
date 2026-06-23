@@ -37,15 +37,7 @@ const nextConfig = {
       }
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: '/((?!maintenance|_next|favicon.ico|.*\\.(?:png|jpg|jpeg|svg|gif|webp|avif)$).*)',
-        destination: '/maintenance',
-        permanent: false,
-      },
-    ];
-  },
+
   images: {
     remotePatterns: [
       {
